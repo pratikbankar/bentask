@@ -1,0 +1,19 @@
+<div class="container" style="margin-top: 6%;">
+    <div class = "row">
+        <div class = "col-md-12 text-center">
+            <div class="card-base">
+    <div class="card-icon"><a href="#" title="Widgets" id="widgetCardIcon" class="imagecard"><i class="fa fa-user"></i></a>
+    <div class="card-data widgetCardData">
+    <h2 class="box-title" style="color: #bb7824;margin-top:15px;">Welcome, {{empname}}</h2><br>
+    <h4 class="card-block text-center">ID: {{empid}}</h4>
+    <h4 class="card-block text-center">Username: {{username}}</h4>
+    <h4 *ngIf="role==2" class="card-block text-center">Role: Employee</h4>
+    <h4 *ngIf="role==1" class="card-block text-center">Role: Manager</h4>
+    
+</div>
+    </div>
+    <div class="space"></div>
+    </div>
+        </div>
+    </div>
+    </div>

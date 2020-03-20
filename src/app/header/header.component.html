@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" style="color:#ffff" href="#">Benison Task</a>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        
+      </ul>
+     <a href="#" (click)="logout()"><span class="navbar-text" style="color:#ffff">
+        Logout
+      </span></a> 
+    </div>
+  </nav>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12 text-center">
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary" appChecked highlightColor>
+        <input type="radio" name="options1" id="option1"  [routerLink]="['/dashboard']" [checked]='routurlclassc'> Dashboard
+      </label>
+    <label *ngIf="role==2" class="btn btn-secondary" appChecked highlightColor>
+      <input type="radio" name="options2" id="option2"  [routerLink]="['/feedback']" [checked]='routurlclasssecondc'> Feedback Form
+    </label>
+    <label class="btn btn-secondary" appChecked highlightColor>
+      <input type="radio" name="options3" id="option3"  [routerLink]="['/feedbacklist']" [checked]='routurlclassthirdc'> Feedback List
+    </label>
+  </div>
+</div>
+</div>
+</div>
+
+
+    
+   

@@ -1,0 +1,98 @@
+<div class="container">
+    <div class="note">
+        <p>Feedback List</p>
+    </div>
+<div class="row" style="margin-top:2%">
+    <div class="col-md-4 text-center">
+        
+        </div>
+    <div class="col-md-4 text-center">
+    <div class="form-group">  
+        <input
+        type="text"
+        class="form-control"
+        name="searchString"
+        placeholder="Type to search project name..."
+        [(ngModel)]="searchString"
+      />
+      </div>  
+    </div>
+    <div class="col-md-4 text-center">
+      
+    </div>
+   
+</div>
+<table class="table table-striped">
+
+
+    <thead>
+      <tr class="text-center">
+        <th scope="col">#</th>
+        <th scope="col" *ngIf="role==1">Employee ID</th>
+        <th scope="col" *ngIf="role==1">Employee Name</th>
+        <th scope="col">Project Name</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Comments</th>
+        <th scope="col">Manager Rating</th>
+        <th scope="col">Manager Comment</th>
+        <th scope="col">Date</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor="let val of listdata | filter : 'project_name' : searchString; let i = index">
+        <th scope="row">{{val.id}}</th>
+        <td *ngIf="role==1">{{val.emp_id}}</td>
+        <td *ngIf="role==1">{{val.emp_name}}</td>
+        <td>{{val.project_name}}</td>
+        <td><ngx-stars [readonly]="true" [size]="1" [initialStars]="val.emp_rating"></ngx-stars> </td>
+        <td>{{val.emp_comment}}</td>
+        <td *ngIf="role==2"><ngx-stars [readonly]="true" [size]="1" [initialStars]="val.mng_rating"></ngx-stars></td>
+       
+       
+        <td *ngIf="role==2"><span *ngIf="val.mng_comment==''" style="color:red">Still not updated</span> <span style="color:red">{{val.mng_comment}}</span></td>
+        
+        
+        <td *ngIf="role==1 && getid !=val.id"><ngx-stars [readonly]="true" [size]="1" [initialStars]="val.mng_rating"></ngx-stars></td>
+        <td *ngIf="role==1 && isEditable && getid==val.id"><ngx-stars [readonly]="false" [size]="1" [initialStars]="val.mng_rating" (ratingOutput)="onRatingSet($event)"></ngx-stars></td>
+
+
+        <td *ngIf="role==1 && getid !=val.id"><span style="color:red">{{val.mng_comment}}</span></td>
+        <td *ngIf="role==1 && isEditable && getid==val.id"><input type="text" [(ngModel)]="model.mngcomment" value="{{val.mng_comment}}"/></td>
+
+
+        <td>{{val.date | date: 'dd/MM/yyyy'}}</td>
+        <td *ngIf="role==2 && val.status==1"><a href="#" [routerLink]="['/feedback',val.id]"><i class="fa fa-pencil"></i></a>&nbsp; <span style="cursor: pointer;"> <i class="fa fa-trash"  data-toggle="modal" data-target="#exampleModal" (click)="deletefeedbackbefore(val.id)" style="color:red"></i></span></td>
+        <td *ngIf="role==2 && val.status==0"><span style="cursor: pointer;"> <i class="fa fa-pencil"></i></span>&nbsp; <span style="cursor: pointer;"> <i class="fa fa-trash" style="color:red"></i></span></td>
+        <td *ngIf="role==1"> 
+            <span *ngIf="role==1 && getid !=val.id" style="cursor: pointer;" (click)="editRow(val)"><i class="fa fa-pencil"></i></span>
+
+            <span *ngIf="role==1 && isEditable && getid==val.id" style="cursor: pointer;" (click)="updateRow(val)" style="color:green"><i class="fa fa-check fa-2x"></i></span>
+                       
+            &nbsp; <span style="cursor: pointer;"> <i class="fa fa-trash"  data-toggle="modal" data-target="#exampleModal" (click)="deletefeedbackbefore(val.id)" style="color:red"></i></span></td>
+     
+        </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Feedback</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are you sure want to delete?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" (click)="deletefeedback()" data-dismiss="modal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
