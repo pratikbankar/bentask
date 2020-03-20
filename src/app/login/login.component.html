@@ -16,7 +16,7 @@
             <form name="form" [formGroup]="loginForm" class="form-signin" (ngSubmit)="login()">
               <div class="form-label-group">
                 <input type="text" id="username" formControlName="username"  name="username" [(ngModel)]="model.username" class="form-control fheight" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="User Name" required autofocus>
-                <label for="username">Email address</label>
+                <label for="username">User Name</label>
 
                 <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                     <div *ngIf="f.username.errors.required">Username is required</div>
